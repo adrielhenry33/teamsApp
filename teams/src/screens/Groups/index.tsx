@@ -3,6 +3,8 @@ import { Container } from './styles';
 import { Highlight } from '@components/Highlight/indext';
 import { GroupCard } from '@components/GroupCard';
 import { ListEmpty } from '@components/ListEmpty';
+import { Button } from '@components/Button';
+
 
 import { useState } from 'react';
 import { FlatList } from 'react-native';
@@ -36,7 +38,8 @@ export default function Groups() {
         )}
       />
 
-      
+        <Button title = "Criar uma nova turma" />
+
     </Container>
   );
 }
