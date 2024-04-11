@@ -2,6 +2,7 @@ import { Header } from '@components/Header';
 import { Container } from './styles';
 import { Highlight } from '@components/Highlight/indext';
 import { GroupCard } from '@components/GroupCard';
+import { ListEmpty } from '@components/ListEmpty';
 
 import { useState } from 'react';
 import { FlatList } from 'react-native';
@@ -9,7 +10,7 @@ import { FlatList } from 'react-native';
 
 export default function Groups() {
   
-  const [groups, setGroups] = useState<string[]>(['Rocktet', 'Cruzeiro']);
+  const [groups, setGroups] = useState<string[]>(['Sao Paulo']);
   
   return (
     <Container>
@@ -26,6 +27,11 @@ export default function Groups() {
         renderItem={({ item }) => (
           <GroupCard
           title={item}
+          />
+        )}
+        ListEmptyComponent={()=> (
+        <ListEmpty 
+          message="Que tal cadastrar a primeira turma?"
           />
         )}
       />
