@@ -38,7 +38,8 @@ export default function Groups() {
         )}
       />
 
-        <Button title = "Criar uma nova turma" />
+        <Button title = "Criar uma nova turma" 
+        />
 
     </Container>
   );
