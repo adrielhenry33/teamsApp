@@ -6,7 +6,7 @@ import { Button } from '@components/Button';
 import { Input } from '@components/InputText/indext';
 
 
-export function NewGroup(){
+export function NewGroups(){
     return(
         <Container>
             <Header showBackButton/>
