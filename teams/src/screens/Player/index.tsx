@@ -6,6 +6,7 @@ import { ButtonIcon } from '@components/ButtonIcon';
 import { Input } from '@components/InputText/indext';
 
 import { useTheme } from 'styled-components';
+import { Filter } from '@components/Filter';
 
 export function Players(){
     const {COLORS} = useTheme();
@@ -27,6 +28,8 @@ export function Players(){
             
                 <ButtonIcon icon= "add"/>
             </Form>
+
+            <Filter title="Time A" />
 
         </Container>
     );
