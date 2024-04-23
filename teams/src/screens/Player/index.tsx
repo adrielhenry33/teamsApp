@@ -6,6 +6,9 @@ import { ButtonIcon } from '@components/ButtonIcon';
 import { Input } from '@components/InputText/indext';
 import { Filter } from '@components/Filter';
 import { PlayerCard } from '@components/PlayerCard';
+import { ListEmpty } from '@components/ListEmpty';
+import { Button } from '@components/Button';
+
 
 import { FlatList } from 'react-native';
 import { useState } from 'react';
@@ -61,8 +64,21 @@ export function Players(){
                     onRemove={()=>{}}
                     /> 
                 )}
+                ListEmptyComponent={()=> (
+                    <ListEmpty
+                        message="Não há pessoas nesse time."
+                    />
+                )}
+                showsVerticalScrollIndicator = {false}
+                contentContainerStyle = {[
+                    {paddingBottom: 100},
+                    player.length === 0 && {flex:1}
+                ]}
             />
-
+        <Button
+           title="Remover turma"        
+           type="SECUNDARY"
+        />
         </Container>
     );
 }
