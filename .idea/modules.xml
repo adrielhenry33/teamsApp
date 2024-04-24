@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/teamsApp.iml" filepath="$PROJECT_DIR$/.idea/teamsApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/to-doListAppMobile.iml" filepath="$PROJECT_DIR$/.idea/to-doListAppMobile.iml" />
     </modules>
   </component>
 </project>
