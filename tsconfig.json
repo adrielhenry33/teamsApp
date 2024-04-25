@@ -12,11 +12,6 @@
       "@components/*": [
         "./src/components/*"
       ],
-
-      "@routes/*": [
-        "./src/routs/*"
-      ],
-
       "@screens/*": [
         "./src/screens/*"
       ],

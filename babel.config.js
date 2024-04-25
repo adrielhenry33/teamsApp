@@ -11,7 +11,6 @@ module.exports = function(api) {
           alias: {
             '@assets'    : './src/assets', //apelidos para chamar os enderecos
             '@components': './src/components',
-            '@routes'    : './src/routs',
             '@screens'   : './src/screens',
             '@storage'   : './src/storage',
             '@utils'     : './src/utils',
