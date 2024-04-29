@@ -5,19 +5,35 @@ import { GroupCard } from '@components/GroupCard';
 import { ListEmpty } from '@components/ListEmpty';
 import { Button } from '@components/Button';
 
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import { useState } from 'react';
 import { FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
+/*
+type RootParamList = {
+    groups: undefined;
+    new: undefined;
+    player: {
+      group: string;
+    }
+}
+*/
+/*
+type Props = {
+  navigation : NativeStackNavigationProp<RootParamList, 'groups'>;
+}
+*/
+
 export function Groups() {
   
   const [groups, setGroups] = useState<string[]>([]);
-  
   const navigation = useNavigation();
 
+
   function handleNewGroups(){
-    navigation.navigate('players', {group: 'galera do voleis'});//propriedade usse navigation
+    navigation.navigate("new");
   }
 
   return (
