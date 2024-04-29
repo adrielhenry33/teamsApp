@@ -8,12 +8,18 @@ import { Button } from '@components/Button';
 
 import { useState } from 'react';
 import { FlatList } from 'react-native';
-
+import { useNavigation } from '@react-navigation/native';
 
 export function Groups() {
   
   const [groups, setGroups] = useState<string[]>([]);
   
+  const navigation = useNavigation();
+
+  function handleNewGroups(){
+    navigation.navigate('players', {group: 'galera do voleis'});//propriedade usse navigation
+  }
+
   return (
     <Container>
       <Header />
@@ -39,6 +45,7 @@ export function Groups() {
       />
 
         <Button title = "Criar uma nova turma" 
+        onPress={handleNewGroups}
         />
 
     </Container>

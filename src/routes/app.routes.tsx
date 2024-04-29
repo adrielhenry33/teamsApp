@@ -18,7 +18,7 @@ export function AppRouts(){
             />  
         
             <Screen
-                name = "new" // como se fosse o apelido da tela 
+                name = "new" // como se fosse o apelido da tela
                 component={NewGroups} // chamada do componente NewGroups
             />  
 
