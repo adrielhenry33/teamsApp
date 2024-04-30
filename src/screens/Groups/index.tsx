@@ -37,18 +37,10 @@ export function Groups() {
     navigation.navigate("new");
   }
 
-  function goBack(){
-    navigation.dispatch({
-      ...CommonActions.goBack(),
-      source: "new",
-      target: "group"
-    });
-  }
-
 
   return (
     <Container>
-      <Header />
+      <Header/>
       
       <Highlight
         title = "Turmas"
