@@ -14,10 +14,9 @@ import { FlatList } from 'react-native';
 import { useState } from 'react';
 import { useRoute } from '@react-navigation/native';
 
-type RoutParams ={
+type RouteParams ={
     group: string;
 }
-
 
 export function Players(){
 
