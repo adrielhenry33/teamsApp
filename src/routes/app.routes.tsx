@@ -11,14 +11,15 @@ const { Navigator, Screen } = createNativeStackNavigator();
 
 export function AppRouts(){
     return (
-        <Navigator screenOptions={{headerShown: false}}>
+        //propriedade do navigator que tira o cabecalho
+        <Navigator screenOptions={{headerShown: false}}> 
             <Screen
                 name = "groups" // como se fosse o apelido da tela 
                 component={Groups} // chamada do componente Groups
             />  
         
             <Screen
-                name = "new" // como se fosse o apelido da tela
+                name = "new" // como se fosse o apelido da tela 
                 component={NewGroups} // chamada do componente NewGroups
             />  
 

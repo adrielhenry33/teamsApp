@@ -12,7 +12,7 @@ export const Container = styled(SafeAreaView)`
 
 `;
 
-export const Form = styled(SafeAreaView)`
+export const Form = styled.View`
     width: 100%;
     background-color: ${({ theme }) => theme.COLORS.GRAY_700} ;
 
@@ -22,7 +22,7 @@ export const Form = styled(SafeAreaView)`
     border-radius: 6px;
 `;
 
-export const HeaderList = styled(SafeAreaView)`
+export const HeaderList = styled.View`
 
     width: 100%;
 

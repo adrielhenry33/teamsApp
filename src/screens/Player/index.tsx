@@ -12,18 +12,27 @@ import { Button } from '@components/Button';
 
 import { FlatList } from 'react-native';
 import { useState } from 'react';
+import { useRoute } from '@react-navigation/native';
+
+type RoutParams ={
+    group: string;
+}
 
 
 export function Players(){
 
     const [team, setTeam] = useState('Time A');
-    const [player, setPlayer] = useState(['Adriel', 'Sarah']);
+    const [player, setPlayer] = useState([]);
+
+    const route = useRoute(); //acessa os parametro passados pela rota
+                             //para o componente
+    const {group} = route.params as RouteParams;
     return (
         <Container>
             <Header showBackButton/>
             
             <Highlight 
-                title = "Nome da turma "
+                title = {group}
                 subtitle= "adicione a galera e separe os times"
             />
             

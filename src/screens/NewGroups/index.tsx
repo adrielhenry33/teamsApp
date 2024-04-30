@@ -6,14 +6,17 @@ import { Button } from '@components/Button';
 import { Input } from '@components/InputText/indext';
 
 import { useNavigation } from '@react-navigation/native';
+import { useState } from 'react';
 
 
 export function NewGroups(){
-    
+    //passando informacoes de uma tela para outra
+    const [groupsname, setGroupName] = useState('');
+
     const navigator = useNavigation();
 
     function handleNewPlayers(){
-        navigator.navigate("players", {group: 'Sao Paulo'});
+        navigator.navigate("players", { group: groupsname });
     }
     
     return(
@@ -29,6 +32,7 @@ export function NewGroups(){
 
                 <Input
                     placeholder="Nome da turma"
+                    onChangeText={setGroupName}
                 />
                 <Button
                     title="Criar"
