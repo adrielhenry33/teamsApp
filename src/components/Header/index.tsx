@@ -1,5 +1,6 @@
 import { Container, Logo, BackIcon, BackButton } from "./styles";
 
+import { useNavigation } from "@react-navigation/native";
 
 import logoImg from '@assets/logo.png';
 
@@ -9,11 +10,21 @@ type Props = {
 
 
 export function Header ( {showBackButton = false}:Props ){
+    
+    const navigation = useNavigation();
+    
+    //Grousp > new Groups > players
+
+    function handleGoBack(){
+        navigation.navigate("groups");
+        //navigation.popToTop(); volta pro inicio 
+    }
+    
     return (
         <Container>
             {
                 showBackButton &&  
-                <BackButton>
+                <BackButton onPress={handleGoBack}>
                     <BackIcon   />
                 </BackButton>
             

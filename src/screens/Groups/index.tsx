@@ -10,6 +10,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useState } from 'react';
 import { FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { CommonActions } from '@react-navigation/native';
 
 /*
 type RootParamList = {
@@ -35,6 +36,15 @@ export function Groups() {
   function handleNewGroups(){
     navigation.navigate("new");
   }
+
+  function goBack(){
+    navigation.dispatch({
+      ...CommonActions.goBack(),
+      source: "new",
+      target: "group"
+    });
+  }
+
 
   return (
     <Container>
