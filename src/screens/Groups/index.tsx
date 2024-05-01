@@ -6,9 +6,9 @@ import { ListEmpty } from '@components/ListEmpty';
 import { Button } from '@components/Button';
 import { groupsGetAll } from '@storage/group/groupsGetAll';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { FlatList } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
 
 /*
 type RootParamList = {
@@ -37,13 +37,21 @@ export function Groups() {
 
   async function fetchGroups(){
     try {
-     const data = await groupsGetAll();
+      //buscando os grupos ja pre cadastrados na tela de groups 
+      const data = await groupsGetAll();
+      setGroups(data);
+
     } catch (error) {
       console.log("error")
     }
   }
-
-
+  //o useFocusEffect  faz com que os times cadastrado aparecam na primeira turma
+  //no caso a string que cadastra o time. Porem como a string esta vazia ele executa uma vez
+  //toda vez que voltamos para executar uma turma o useFocusEffect execut simultaneamte 
+  useFocusEffect(useCallback(() => {
+    fetchGroups();
+  }, []));
+  
   return (
     <Container>
       <Header/>
