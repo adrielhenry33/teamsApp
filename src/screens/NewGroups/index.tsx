@@ -4,6 +4,7 @@ import { Header } from '@components/Header';
 import { Highlight } from '@components/Highlight/indext';
 import { Button } from '@components/Button';
 import { Input } from '@components/InputText/indext';
+import { groupCreate } from '@storage/group/groupCreat';
 
 import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
@@ -15,8 +16,13 @@ export function NewGroups(){
 
     const navigator = useNavigation();
 
-    function handleNewPlayers(){
+    async function handleNewPlayers(){
+       try {
+        await groupCreate(groupsname);
         navigator.navigate("players", { group: groupsname });
+       } catch (error) {
+        console.log(error);
+       }
     }
     
     return(

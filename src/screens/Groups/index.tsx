@@ -4,13 +4,11 @@ import { Highlight } from '@components/Highlight/indext';
 import { GroupCard } from '@components/GroupCard';
 import { ListEmpty } from '@components/ListEmpty';
 import { Button } from '@components/Button';
+import { groupsGetAll } from '@storage/group/groupsGetAll';
 
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { CommonActions } from '@react-navigation/native';
 
 /*
 type RootParamList = {
@@ -35,6 +33,14 @@ export function Groups() {
 
   function handleNewGroups(){
     navigation.navigate("new");
+  }
+
+  async function fetchGroups(){
+    try {
+     const data = await groupsGetAll();
+    } catch (error) {
+      console.log("error")
+    }
   }
 
 
