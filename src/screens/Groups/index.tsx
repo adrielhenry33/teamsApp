@@ -10,15 +10,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { FlatList } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 
-/*
-type RootParamList = {
-    groups: undefined;
-    new: undefined;
-    player: {
-      group: string;
-    }
-}
-*/
+
 /*
 type Props = {
   navigation : NativeStackNavigationProp<RootParamList, 'groups'>;

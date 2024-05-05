@@ -14,6 +14,7 @@ export async function groupCreate (newGroup: string) {
         const groupAlreadyExist = storedGroups.includes(newGroup);
         
         if (groupAlreadyExist) {
+            //App error e a classe criada 
             throw new AppError("Ja existe um grupo com esse nome!");
         }
 
@@ -23,6 +24,7 @@ export async function groupCreate (newGroup: string) {
 
         //setando no armazenamento o storage passando a chave de referencia
         await AsyncStorage.setItem(GROUP_COLLECTION, storage); //chave unica e o valor
+    
     }catch(error){
         throw error;
     }
