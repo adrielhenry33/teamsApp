@@ -10,7 +10,6 @@ import { useState, useEffect, useCallback } from 'react';
 import { FlatList } from 'react-native';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 
-
 /*
 type Props = {
   navigation : NativeStackNavigationProp<RootParamList, 'groups'>;
@@ -21,7 +20,6 @@ export function Groups() {
   
   const [groups, setGroups] = useState<string[]>([]);
   const navigation = useNavigation();
-
 
   function handleNewGroups(){
     navigation.navigate("new");
@@ -34,18 +32,20 @@ export function Groups() {
       setGroups(data);
 
     } catch (error) {
-      console.log("error")
+      console.log("error");
     }
   }
-  //o useFocusEffect  faz com que os times cadastrado aparecam na primeira turma
-  //no caso a string que cadastra o time. Porem como a string esta vazia ele executa uma vez
-  //toda vez que voltamos para executar uma turma o useFocusEffect execut simultaneamte 
+
+  function handleOpenGroup(nameGroup: string ){
+    navigation.navigate("players", {nameGroup});
+  }
+  
   useFocusEffect(useCallback(() => {
     fetchGroups();
   }, []));
   
   return (
-    <Container>
+    <Container >
       <Header/>
       
       <Highlight
@@ -58,18 +58,22 @@ export function Groups() {
         keyExtractor={item => item} //extrair uma valor unico para cada item da lista
         renderItem={({ item }) => (
           <GroupCard
-          title={item}
+            title={item}
+            onPress={ () => handleOpenGroup(item)}
           />
         )}
+        contentContainerStyle ={groups.length === 0 && {flex: 1}}
         ListEmptyComponent={()=> (
         <ListEmpty 
           message="Que tal cadastrar a primeira turma?"
           />
         )}
+        showsVerticalScrollIndicator ={false}
       />
 
-        <Button title = "Criar uma nova turma" 
-        onPress={handleNewGroups}
+        <Button 
+            title = "Criar uma nova turma" 
+            onPress={handleNewGroups}
         />
 
     </Container>
