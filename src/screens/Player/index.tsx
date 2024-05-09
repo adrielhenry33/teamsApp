@@ -15,7 +15,7 @@ import { playerGetByGroupAndTeam } from '@storage/player/playerGetByGroupAndTeam
 import { PlayerStorageDTO } from '@storage/player/PlayerStorageDTO';
 
 import { FlatList } from 'react-native';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRoute } from '@react-navigation/native';
 import { Alert } from 'react-native';
 
@@ -44,7 +44,7 @@ export function Players(){
         }
         try {
             await playerAddByGroup(newPlayer, group);
-            
+            fetchPlayersByTeam();
         } catch (error) {
             if(error instanceof AppError){
                 Alert.alert("Nova Pessoa", error.message)
@@ -61,8 +61,14 @@ export function Players(){
            setPlayer(playerByTeam);
         } catch (error) {
             console.log(error);
+            Alert.alert("Pessoas", "Nao foi possivel carregar as pessoas do time selecionadas");
         }
     }
+    // 
+    useEffect(()=> {
+        // o que queremos executar
+        fetchPlayersByTeam();
+    }, [team]); // toda vez que o estado do team mudar ele ira carregar o fetch
 
     return (
         <Container>
@@ -107,10 +113,10 @@ export function Players(){
 
             <FlatList
                 data={player}
-                keyExtractor={item => item}
+                keyExtractor={item => item.name}
                 renderItem={({item}) =>(
                    <PlayerCard
-                    name= { item }
+                    name= { item.name }
                     onRemove={()=>{}}
                     /> 
                 )}
