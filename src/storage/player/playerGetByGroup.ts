@@ -11,6 +11,6 @@ export async function playersGetByGroup(group: string){
         return players;
 
     } catch (error) {
-        
+        throw error;
     }
 }
