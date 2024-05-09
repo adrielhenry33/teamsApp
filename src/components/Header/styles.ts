@@ -1,8 +1,9 @@
 import styled from 'styled-components/native';
 import { Car, CaretLeft } from "phosphor-react-native"; //icone 
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
-export const Container = styled.View`
+export const Container = styled(SafeAreaView)`
   width: 100%;
   flex-direction: row;
   align-items: center;
