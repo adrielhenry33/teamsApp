@@ -8,16 +8,17 @@ import { Filter } from '@components/Filter';
 import { PlayerCard } from '@components/PlayerCard';
 import { ListEmpty } from '@components/ListEmpty';
 import { Button } from '@components/Button';
+
 import { AppError } from '@utils/AppErro';
-
-
+import { playerAddByGroup } from '@storage/player/playerAddByGroup';
+import { playerGetByGroupAndTeam } from '@storage/player/playerGetByGroupAndTeam';
+import { PlayerStorageDTO } from '@storage/player/PlayerStorageDTO';
 
 import { FlatList } from 'react-native';
 import { useState } from 'react';
 import { useRoute } from '@react-navigation/native';
 import { Alert } from 'react-native';
-import { playerAddByGroup } from '@storage/player/playerAddByGroup';
-import { playersGetByGroup } from '@storage/player/playerGetByGroup';
+
 
 type RouteParams ={
     group: string;
@@ -27,7 +28,7 @@ export function Players(){
 
     const [newPlayerName, setNewPlayerName] = useState('');
     const [team, setTeam] = useState('Time A');
-    const [player, setPlayer] = useState([]);
+    const [player, setPlayer] = useState<PlayerStorageDTO[]>([]);
 
     const route = useRoute(); //acessa os parametro passados pela rota
                              //para o componente
@@ -43,8 +44,6 @@ export function Players(){
         }
         try {
             await playerAddByGroup(newPlayer, group);
-            const players = await playersGetByGroup(group);
-            console.log(players);
             
         } catch (error) {
             if(error instanceof AppError){
@@ -52,8 +51,16 @@ export function Players(){
             } else {
                 console.log(error);
                 Alert.alert("Nova Pessoa", "Nao foi possivel adicionar");
-
             }
+        }
+    }
+
+    async function fetchPlayersByTeam(){
+        try {
+           const playerByTeam =  await playerGetByGroupAndTeam(group, team);
+           setPlayer(playerByTeam);
+        } catch (error) {
+            console.log(error);
         }
     }
 
