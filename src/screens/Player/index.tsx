@@ -13,6 +13,7 @@ import { AppError } from '@utils/AppErro';
 import { playerAddByGroup } from '@storage/player/playerAddByGroup';
 import { playerGetByGroupAndTeam } from '@storage/player/playerGetByGroupAndTeam';
 import { PlayerStorageDTO } from '@storage/player/PlayerStorageDTO';
+import { playerRemoveByGroup } from '@storage/player/playerRemoveByGroup';
 
 import { FlatList, Keyboard, TextInput } from 'react-native';
 import { useState, useEffect, useRef } from 'react';
@@ -60,6 +61,16 @@ export function Players(){
                 console.log(error);
                 Alert.alert("Nova Pessoa", "Nao foi possivel adicionar");
             }
+        }
+    }
+
+    async function handlePlayerRemove (playername: string){
+        try {
+            await playerRemoveByGroup(playername, group);
+            fetchPlayersByTeam();
+
+        } catch (error) {
+            Alert.alert('Remover pessoa', 'Nao foi possivel remover a pessoa selecionada');
         }
     }
 
@@ -129,7 +140,7 @@ export function Players(){
                 renderItem={({item}) =>(
                    <PlayerCard
                     name= { item.name }
-                    onRemove={()=>{}}
+                    onRemove={()=>handlePlayerRemove(item.name)}
                     /> 
                 )}
                 ListEmptyComponent={()=> (
