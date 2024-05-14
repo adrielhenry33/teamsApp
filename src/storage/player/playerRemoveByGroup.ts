@@ -15,6 +15,4 @@ export async function playerRemoveByGroup(playerName: string, group: string){
     } catch (error) {
         throw error;
     }
-
-    
 }

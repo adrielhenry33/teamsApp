@@ -10,14 +10,17 @@ import { ListEmpty } from '@components/ListEmpty';
 import { Button } from '@components/Button';
 
 import { AppError } from '@utils/AppErro';
+
 import { playerAddByGroup } from '@storage/player/playerAddByGroup';
 import { playerGetByGroupAndTeam } from '@storage/player/playerGetByGroupAndTeam';
 import { PlayerStorageDTO } from '@storage/player/PlayerStorageDTO';
 import { playerRemoveByGroup } from '@storage/player/playerRemoveByGroup';
+import { groupRemoveByName } from '@storage/group/groupRemoveByName';
+
 
 import { FlatList, Keyboard, TextInput } from 'react-native';
 import { useState, useEffect, useRef } from 'react';
-import { useRoute } from '@react-navigation/native';
+import { useRoute, useNavigation } from '@react-navigation/native';
 import { Alert } from 'react-native';
 
 
@@ -36,7 +39,7 @@ export function Players(){
     const {group} = route.params as RouteParams;
 
     const newPlayerNameInputRef = useRef<TextInput>(null)
-
+    const navigation = useNavigation();
 
     async function handleAddPlayer(){
         if (newPlayerName.trim().length === 0) {
@@ -63,16 +66,35 @@ export function Players(){
             }
         }
     }
+    async function groupRemove(){
+            try {
+                await groupRemoveByName(group);
+                navigation.navigate('groups');
 
-    async function handlePlayerRemove (playername: string){
-        try {
-            await playerRemoveByGroup(playername, group);
-            fetchPlayersByTeam();
-
-        } catch (error) {
-            Alert.alert('Remover pessoa', 'Nao foi possivel remover a pessoa selecionada');
+            } catch (error) {
+                Alert.alert("Remover Grupo", "Nao foi possivel remover o grupo");
+            }
         }
+
+    async function handleGroupRemove(){
+       Alert.alert("Remover", "Deseja remover o grupo?", 
+            [
+                {text: 'Não', style: 'cancel' },
+                {text: 'Sim', onPress:() => groupRemove()}
+            ]
+        );
     }
+    
+    async function handlePlayerRemove (playername: string){ 
+            try {
+                await playerRemoveByGroup(playername, group);
+                fetchPlayersByTeam();
+
+            } catch (error) {
+                Alert.alert('Remover pessoa', 'Nao foi possivel remover a pessoa selecionada');
+            }
+    }
+
 
     async function fetchPlayersByTeam(){
         try {
@@ -157,6 +179,7 @@ export function Players(){
         <Button
            title="Remover turma"        
            type="SECUNDARY"
+           onPress={handleGroupRemove}
         />
         </Container>
     );
