@@ -14,7 +14,7 @@ import { playerAddByGroup } from '@storage/player/playerAddByGroup';
 import { playerGetByGroupAndTeam } from '@storage/player/playerGetByGroupAndTeam';
 import { PlayerStorageDTO } from '@storage/player/PlayerStorageDTO';
 
-import { FlatList, TextInput } from 'react-native';
+import { FlatList, Keyboard, TextInput } from 'react-native';
 import { useState, useEffect, useRef } from 'react';
 import { useRoute } from '@react-navigation/native';
 import { Alert } from 'react-native';
@@ -49,7 +49,7 @@ export function Players(){
             await playerAddByGroup(newPlayer, group);
 
             newPlayerNameInputRef.current?.blur();
-
+            Keyboard.dismiss();
             setNewPlayerName('');
             fetchPlayersByTeam();
 
@@ -94,6 +94,8 @@ export function Players(){
                     value={newPlayerName}
                     placeholder="Nome do player"
                     autoCorrect ={false}
+                    onSubmitEditing={handleAddPlayer}
+                    returnKeyType="done"
                 />
             
                 <ButtonIcon 
