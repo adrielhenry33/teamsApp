@@ -14,8 +14,8 @@ import { playerAddByGroup } from '@storage/player/playerAddByGroup';
 import { playerGetByGroupAndTeam } from '@storage/player/playerGetByGroupAndTeam';
 import { PlayerStorageDTO } from '@storage/player/PlayerStorageDTO';
 
-import { FlatList } from 'react-native';
-import { useState, useEffect } from 'react';
+import { FlatList, TextInput } from 'react-native';
+import { useState, useEffect, useRef } from 'react';
 import { useRoute } from '@react-navigation/native';
 import { Alert } from 'react-native';
 
@@ -34,6 +34,9 @@ export function Players(){
                              //para o componente
     const {group} = route.params as RouteParams;
 
+    const newPlayerNameInputRef = useRef<TextInput>(null)
+
+
     async function handleAddPlayer(){
         if (newPlayerName.trim().length === 0) {
             return Alert.alert("Nova pessoa", "Informe o nome da pessoa para adicionar");
@@ -44,7 +47,12 @@ export function Players(){
         }
         try {
             await playerAddByGroup(newPlayer, group);
+
+            newPlayerNameInputRef.current?.blur();
+
+            setNewPlayerName('');
             fetchPlayersByTeam();
+
         } catch (error) {
             if(error instanceof AppError){
                 Alert.alert("Nova Pessoa", error.message)
@@ -81,7 +89,9 @@ export function Players(){
             
             <Form>
                 <Input
+                    inputRef = {newPlayerNameInputRef}
                     onChangeText={setNewPlayerName}
+                    value={newPlayerName}
                     placeholder="Nome do player"
                     autoCorrect ={false}
                 />

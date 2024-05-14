@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components/native';
 import { MaterialIcons} from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-export const Container = styled(SafeAreaView)`
+export const Container = styled.View`
     ${({ theme }) =>css`
         background-color: ${theme.COLORS.GRAY_500};
     `};
