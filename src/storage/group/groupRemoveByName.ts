@@ -5,11 +5,11 @@ import { groupsGetAll } from "./groupsGetAll";
 
 export async function groupRemoveByName(groupDeleted: string){
     try {
-        const storage = await groupsGetAll();
+        const storedGroups = await groupsGetAll();
 
-        const group = storage.filter(group => group !== groupDeleted);
+        const groups = storedGroups.filter(group => group !== groupDeleted);
 
-        await AsyncStorage.setItem(GROUP_COLLECTION, JSON.stringify(group));
+        await AsyncStorage.setItem(GROUP_COLLECTION, JSON.stringify(groups));
         await AsyncStorage.removeItem(`${PLAYER_COLLECTION}-${groupDeleted}`);
         
     } catch (error) {

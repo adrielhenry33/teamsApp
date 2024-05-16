@@ -66,24 +66,27 @@ export function Players(){
             }
         }
     }
-    async function groupRemove(){
-            try {
-                await groupRemoveByName(group);
-                navigation.navigate('groups');
-
-            } catch (error) {
-                Alert.alert("Remover Grupo", "Nao foi possivel remover o grupo");
-            }
-        }
-
+    
     async function handleGroupRemove(){
-       Alert.alert("Remover", "Deseja remover o grupo?", 
+       Alert.alert(
+        "Remover", 
+        "Deseja remover A turma?", 
             [
                 {text: 'Não', style: 'cancel' },
-                {text: 'Sim', onPress:() => groupRemove()}
+                {text: 'Sim', onPress: () => groupRemove()}
             ]
         );
     }
+    async function groupRemove(){
+        try {
+            groupRemoveByName(group);
+            navigation.navigate('groups');4
+        } catch (error) {
+            console.log(error);
+            Alert.alert("Remover Grupo", "Nao foi possivel remover o grupo");
+        }
+    }
+
     
     async function handlePlayerRemove (playername: string){ 
             try {
@@ -176,11 +179,11 @@ export function Players(){
                     player.length === 0 && {flex:1}
                 ]}
             />
-        <Button
-           title="Remover turma"        
-           type="SECUNDARY"
-           onPress={handleGroupRemove}
-        />
+            <Button
+            title="Remover turma"        
+            type="SECUNDARY"
+            onPress={handleGroupRemove}
+            />
         </Container>
     );
 }
